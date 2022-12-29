@@ -20,12 +20,12 @@
     </nav>
 <!-- ---------------------------------------------------------------------------- -->
 
- <div class="container w-full h-full flex items-center justify-center" x-data="rest-api" x-init="countTodosByState()">
+ <div class="container w-full h-full flex items-center justify-center">
   <div class="w-1/2 md:flex-row mx-auto bg-gray-200 rounded-lg shadow-lg px-2 py-1 my-4">
  
 
   <!-- ---------------------------------------------------------------------------- -->  
-    <div class="form-group">
+    <div class="form-group" x-data="rest-api">
      <!-- Add a search bar -->
       <form id="search-form" x-on:submit.prevent="searchTodos()">
         <input type="text" id="search-input" x-model="search" placeholder="Search for a todo" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control">
@@ -34,7 +34,7 @@
     </div> 
  
   <!-- ---------------------------------------------------------------------------- -->
-    <div class="form-group">
+    <div class="form-group" x-data="rest-api">
       <!-- Add a form to add a todo -->
       <form id="add-form" x-on:submit.prevent="addTodo()">
         <input type="text" id="todo-input" x-model="newTodo" placeholder="Add a todo" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control">
@@ -44,7 +44,8 @@
      
   <!-- ---------------------------------------------------------------------------- -->
   <!-- <div class="w-full mt-4 md:flex-row mx-auto bg-blue-200 rounded-lg shadow-lg px-4 py-2 my-2"> -->
-    <ul class="list-group text-center mb-3">
+    <ul class="list-group text-center mb-3 x-data="rest-api">
+     <template x-if="showTodo">
       <li class="list-group-item bg-gray-100 rounded-lg" x-for="todo in todos" :key="todo.id">
        <h3 class="todo-name font-extrabold text-2xl mb-2">{{ todo.name }}</h3>
         <div class="todo-features flex mt-2">
@@ -58,32 +59,34 @@
            </div>
          </div>
            
-           <div class="flex px-20 py-2 text-xl font-bold text-blue-500 justify-between items-center">
+           <div class="flex px-20 py-2 text-xl font-bold text-blue-500 justify-between items-center" x-data="rest-api">
               <button class="btn btn-success" style="margin-left: 10px;" x-on:click="editTodo(todo)">Edit <i class="fas mr-2 ml-1 fa-edit fa-sm"></i></button>
               <button class="btn btn-danger" x-on:click="deleteTodo(todo)">Delete <i class="fas ml-2 fa-trash fa-sm"></i></button>
             </div>
          </li>
+        </template>
        </ul>      
    <!-- </div> --> 
    
    <!-- ---------------------------------------------------------------------------- -->
    
    <!-- <div class="w-full mt-4 md:flex-row mx-auto justify-between bg-white rounded-lg p-3"> -->
-   <div class="countings bg-white rounded-lg p-2 text-center shadow-md" style="display: flex;">  
-     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
+   <div class="countings bg-white rounded-lg p-2 text-center shadow-md" style="display: flex;" x-data="rest-api">  
+     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Completed:</span>
-       <span class="text-gray-900 font-semibold">{{ completed }}</span>
+       <span class="text-gray-900 font-semibold" x-text="completed"></span>
      </div>
-     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
+     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Pending:</span>
-       <span class="text-gray-900 font-semibold">{{ pending }}</span>
+       <span class="text-gray-900 font-semibold" x-text="pending">{{ pending }}</span>
      </div>
-     <div class="todo-counting" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
+     <div class="todo-counting" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">In process:</span>
-       <span class="text-gray-900 font-semibold">{{ inProcess }}</span>
+       <span class="text-gray-900 font-semibold" x-text="inProcess"></span>
      </div>
-  </div>
+  </div> 
 
+<div x-data="rest-api">
 <!-- Create the modal template -->
 <template x-show="editting" class="lg:w-1/3 md:w-1/2 w-full" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
   
@@ -113,7 +116,8 @@
     </form>
   </div>
  </template>
-    
+</div>
+                                            
  </div> 
 </div>
 
