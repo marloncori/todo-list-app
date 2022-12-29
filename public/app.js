@@ -1,7 +1,7 @@
 
 
-document.addEventListener('alpine:init', () => {
-   Alpine.data('rest-api', () => {
+document.addEventListener("alpine:init", () => {
+   Alpine.data("rest-api", () => ({
       todos: [], 
       editing: false, 
       editedTodo: {},
@@ -128,6 +128,6 @@ document.addEventListener('alpine:init', () => {
               this.inProcessCount++;
            }
        });
-    }
-  })
+    },
+  }));
 });
