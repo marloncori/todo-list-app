@@ -74,15 +74,15 @@
    <div class="countings bg-white rounded-lg p-2 text-center shadow-md" style="display: flex;" x-data="rest-api">  
      <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Completed:</span>
-       <span class="text-gray-900 font-semibold" x-text="completed"></span>
+       <span class="text-gray-900 font-semibold" x-text="completedCount"></span>
      </div>
      <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Pending:</span>
-       <span class="text-gray-900 font-semibold" x-text="pending">{{ pending }}</span>
+       <span class="text-gray-900 font-semibold" x-text="pendingCount"></span>
      </div>
      <div class="todo-counting" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">In process:</span>
-       <span class="text-gray-900 font-semibold" x-text="inProcess"></span>
+       <span class="text-gray-900 font-semibold" x-text="inProcessCount"></span>
      </div>
   </div> 
 
