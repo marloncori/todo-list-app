@@ -1,0 +1,19 @@
+{
+  "name": "todo-list-app",
+  "description": "A simpe TODO list web app using Tailwind, Bootstrap, Font Awesome, Alpine.js and Express.js",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marloncori/todo-list-app.git"
+  },
+  "keywords": [],
+  "author": "Marlon Couto Ribeiro < marlon@elemelinguacom >",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marloncori/todo-list-app/issues"
+  },
+  "homepage": " "
+}
