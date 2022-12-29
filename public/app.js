@@ -10,6 +10,7 @@ document.addEventListener("alpine:init", () => {
       completedCount: 0,
       pendingCount: 0,
       inProcessCount: 0,
+      showTodo: false,
      
      // Function to add a todo
      addTodo() {
@@ -25,36 +26,37 @@ document.addEventListener("alpine:init", () => {
          });
 
   
-   // Update the view after the new todo has been added
-   this.$nextTick(() => {
-      // Select the todo list element
-      const todoList = document.querySelector('.todo-list')
+    // Update the view after the new todo has been added
+    this.$nextTick(() => {
+        // Select the todo list element
+        const todoList = document.querySelector('.todo-list')
     
-     // Create a new list item for the todo
-     const todoItem = document.createElement('li')
-     todoItem.innerHTML = 
-       `
-       <h3 class="todo-name font-bold text-2xl mb-2">${this.newTodo.name}</h3>
-        <div class="todo-features flex mt-2">
-          <div class="todo-feature mr-4">
-            <span class="text-gray-700 font-medium">Assigned To:</span>
-            <span class="text-gray-900 font-semibold">${this.newTodo.assignedTo}</span>
-          </div>
-          <div class="todo-feature">
-            <span class="text-gray-700 font-medium">Category:</span>
-            <span class="text-gray-900 font-semibold">${this.newTodo.category}</span>
-          </div>
-        </div>`
+       // Create a new list item for the todo
+       const todoItem = document.createElement('li')
+       todoItem.innerHTML = 
+         `
+         <h3 class="todo-name font-bold text-2xl mb-2">${this.newTodo.name}</h3>
+          <div class="todo-features flex mt-2">
+            <div class="todo-feature mr-4">
+              <span class="text-gray-700 font-medium">Assigned To:</span>
+              <span class="text-gray-900 font-semibold">${this.newTodo.assignedTo}</span>
+            </div>
+            <div class="todo-feature">
+              <span class="text-gray-700 font-medium">Category:</span>
+              <span class="text-gray-900 font-semibold">${this.newTodo.category}</span>
+            </div>
+          </div>`
     
-      // Append the new list item to the todo list
-      todoList.appendChild(todoItem);
+        // Append the new list item to the todo list
+        todoList.appendChild(todoItem);
 
-   });
-    // Clear the input field
-    this.newTodo = '';
+     });
+      // Clear the input field
+      this.newTodo = '';
 
-    // Update the count of todos by state
-    this.countTodosByState();
+      this.showTodo = true;
+      // Update the count of todos by state
+     this.countTodosByState();
 
    },
 
