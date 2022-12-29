@@ -25,29 +25,32 @@
  
 
   <!-- ---------------------------------------------------------------------------- -->  
-    <div class="form-group" x-data="rest-api">
+  <div x-data="rest-api">
+   <div class="form-group">
      <!-- Add a search bar -->
       <form id="search-form" x-on:submit.prevent="searchTodos()">
         <input type="text" id="search-input" x-model="search" placeholder="Search for a todo" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control">
         <button type="submit" class="btn btn-primary btn-sm mt-1 ml-2">Search<i class="fas ml-2 fa-search fa-sm"></i></button>
       </form>
     </div> 
- 
+</div>
   <!-- ---------------------------------------------------------------------------- -->
-    <div class="form-group" x-data="rest-api">
+  <div x-data="rest-api"></div>
+    <div class="form-group">
       <!-- Add a form to add a todo -->
       <form id="add-form" x-on:submit.prevent="addTodo()">
         <input type="text" id="todo-input" x-model="newTodo" placeholder="Add a todo" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control">
         <button type="submit" class="btn btn-primary btn-sm mt-1 ml-2">Add<i class="fas ml-2 fa-plus fa-sm"></i></button>
       </form>
     </div> 
-     
+ </div>
   <!-- ---------------------------------------------------------------------------- -->
   <!-- <div class="w-full mt-4 md:flex-row mx-auto bg-blue-200 rounded-lg shadow-lg px-4 py-2 my-2"> -->
-    <ul class="list-group text-center mb-3 x-data="rest-api">
-     <template x-if="showTodo">
-      <li class="list-group-item bg-gray-100 rounded-lg" x-for="todo in todos" :key="todo.id">
-       <h3 class="todo-name font-extrabold text-2xl mb-2">{{ todo.name }}</h3>
+   <div x-data="rest-api">
+    <template x-if="showing">
+    <ul class="list-group text-center mb-3">
+      <li class="list-group-item bg-gray-100 rounded-lg" x-for="todo in todos" :key="todo.id" x-bind:class="{ 'opacity-100': showButtons }" x-bind:style="{ 'opacity': showButtons ? 1 : 0 }" x-on:mouseover="showButtons = true" x-on:mouseout="showButtons = false">
+       <h3 class="todo-name font-extrabold text-2xl mb-2"  x-bind:class="{ 'line-through': todo.completed }">{{ todo.name }}</h3>
         <div class="todo-features flex mt-2">
            <div class="todo-feature mr-4">
               <span class="text-gray-700 font-medium">Assigned To:</span>
@@ -58,14 +61,19 @@
               <span class="text-gray-900 font-semibold">{{ todo.category }}</span>
            </div>
          </div>
-           
+         <div x-bind:style="{ 'background-color': todo.status === 'completed' ? 'green' : (todo.status === 'pending' ? 'yellow' : 'red') }">
+                Status: {{ todo.status }}
+         </div>
+         <div x-show="showButtons">
            <div class="flex px-20 py-2 text-xl font-bold text-blue-500 justify-between items-center" x-data="rest-api">
               <button class="btn btn-success" style="margin-left: 10px;" x-on:click="editTodo(todo)">Edit <i class="fas mr-2 ml-1 fa-edit fa-sm"></i></button>
               <button class="btn btn-danger" x-on:click="deleteTodo(todo)">Delete <i class="fas ml-2 fa-trash fa-sm"></i></button>
             </div>
+        </div>
          </li>
-        </template>
-       </ul>      
+       </ul>  
+     </template>    
+    </div>
    <!-- </div> --> 
    
    <!-- ---------------------------------------------------------------------------- -->
@@ -95,14 +103,17 @@
    
     <form class="modal-content w-full max-w-sm py-4 px-6 bg-white rounded-lg shadow-xl" x-on:submit.prevent="updateTodo()">
       <h2 class="modal-title text-2xl font-bold mb-4">Edit Todo</h2>
+
       <div class="form-group mb-4">
         <label for="assigned-to-input" class="form-label text-gray-700 font-medium">Assigned To</label>
         <input type="text" id="assigned-to-input" class="form-input w-full py-2 px-3 text-gray-900 placeholder-gray-500 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300" x-model="editedTodo.assignedTo">
       </div>
+
       <div class="form-group mb-4">
         <label for="category-input" class="form-label text-gray-700 font-medium">Category</label>
         <input type="text" id="category-input" class="form-input w-full py-2 px-3 text-gray-900 placeholder-gray-500 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300" x-model="editedTodo.category">
       </div>
+
       <div class="modal-actions flex justify-end mt-4">
         <button type="submit" class="btn btn-primary" x-on:click="updateTodo()">
            Update
@@ -113,6 +124,7 @@
           <i class="fas ml-2 fa-times fa-sm"></i>
         </button>
       </div>
+
     </form>
   </div>
  </template>
@@ -132,8 +144,8 @@
  </footer>
  
   <!-- Include the Alpine.js library -->
-  <script src="https://unpkg.com/alpine@v3.10.2/dist/cdn.min.js" ></script>
-  <script src="../public/app.js"> </script>
+  <script defer src="https://unpkg.com/alpine@v3.10.2/dist/cdn.min.js" ></script>
+  <script defer src="../public/app.js"> </script>
  
  </body>
 </html>
