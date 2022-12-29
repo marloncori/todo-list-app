@@ -5,7 +5,7 @@
      <!-- Include the Tailwind CSS library -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
      <!-- Include the Bootstrap CSS library -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> -->
      <!-- Include the font awesome library -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   </head>
@@ -25,7 +25,7 @@
  
 
   <!-- ---------------------------------------------------------------------------- -->  
-  <div x-data="rest-api">
+  <template x-data="rest-api">
    <div class="form-group">
      <!-- Add a search bar -->
       <form id="search-form" x-on:submit.prevent="searchTodos()">
@@ -33,9 +33,9 @@
         <button type="submit" class="btn btn-primary btn-sm mt-1 ml-2">Search<i class="fas ml-2 fa-search fa-sm"></i></button>
       </form>
     </div> 
-</div>
+ </template>
   <!-- ---------------------------------------------------------------------------- -->
-  <div x-data="rest-api"></div>
+  <template x-data="rest-api">
     <div class="form-group">
       <!-- Add a form to add a todo -->
       <form id="add-form" x-on:submit.prevent="addTodo()">
@@ -43,11 +43,10 @@
         <button type="submit" class="btn btn-primary btn-sm mt-1 ml-2">Add<i class="fas ml-2 fa-plus fa-sm"></i></button>
       </form>
     </div> 
- </div>
+ </template>
   <!-- ---------------------------------------------------------------------------- -->
   <!-- <div class="w-full mt-4 md:flex-row mx-auto bg-blue-200 rounded-lg shadow-lg px-4 py-2 my-2"> -->
-   <div x-data="rest-api">
-    <template x-if="showing">
+    <template x-data="rest-api" x-if="showing">
     <ul class="list-group text-center mb-3">
       <li class="list-group-item bg-gray-100 rounded-lg" x-for="todo in todos" :key="todo.id" x-bind:class="{ 'opacity-100': showButtons }" x-bind:style="{ 'opacity': showButtons ? 1 : 0 }" x-on:mouseover="showButtons = true" x-on:mouseout="showButtons = false">
        <h3 class="todo-name font-extrabold text-2xl mb-2"  x-bind:class="{ 'line-through': todo.completed }">{{ todo.name }}</h3>
@@ -73,30 +72,31 @@
          </li>
        </ul>  
      </template>    
-    </div>
+    
    <!-- </div> --> 
    
    <!-- ---------------------------------------------------------------------------- -->
    
    <!-- <div class="w-full mt-4 md:flex-row mx-auto justify-between bg-white rounded-lg p-3"> -->
-   <div class="countings bg-white rounded-lg p-2 text-center shadow-md" style="display: flex;" x-data="rest-api">  
-     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
+  <template x-data="rest-api">
+   <div class="countings bg-white rounded-lg p-2 text-center shadow-md" style="display: flex;">  
+      <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Completed:</span>
        <span class="text-gray-900 font-semibold" x-text="completedCount"></span>
-     </div>
-     <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
+      </div>
+      <div class="todo-counting mr-4" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">Pending:</span>
        <span class="text-gray-900 font-semibold" x-text="pendingCount"></span>
-     </div>
+       </div>
      <div class="todo-counting" style="flex: 1; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);" x-effect="countTodosByState()">
        <span class="text-gray-700 font-bold mb-2">In process:</span>
        <span class="text-gray-900 font-semibold" x-text="inProcessCount"></span>
-     </div>
-  </div> 
-
-<div x-data="rest-api">
+      </div>
+  </div > 
+  </template> 
+    
 <!-- Create the modal template -->
-<template x-show="editting" class="lg:w-1/3 md:w-1/2 w-full" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+<template x-data="rest-api" x-show="editting" class="lg:w-1/3 md:w-1/2 w-full" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
   
   <div class="modal-overlay fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-50" x-on:click="closeEditModal()"></div>
    <div class="modal fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
@@ -128,7 +128,6 @@
     </form>
   </div>
  </template>
-</div>
                                             
  </div> 
 </div>
